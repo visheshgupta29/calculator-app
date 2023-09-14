@@ -8,11 +8,11 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="">
+    <div className="main__bg">
       <header className="calculator__header">
         <h1 className="page__heading">calc</h1>
         <div className="theme__component">
-          <h2 className="sub_heading">theme</h2>
+          <h2 className="sub__heading">theme</h2>
           <TripleToggle />
         </div>
       </header>
