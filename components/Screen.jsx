@@ -1,16 +1,19 @@
 import React from "react";
 
-const Screen = () => {
+const Screen = ({ monitorVal, valHolder }) => {
   return (
     <>
-      <div id="valueHolder"></div>
-      <input
+      <div id="valueHolder">{valHolder}</div>
+      {/* <input
         type="text"
         id="calculator__screen"
         className="screen__component"
-        placeholder="0"
+        value={monitorVal}
         disabled
-      />
+      /> */}
+      <div id="calculator__screen" className="screen__component">
+        {monitorVal}
+      </div>
     </>
   );
 };

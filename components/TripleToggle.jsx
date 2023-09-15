@@ -36,21 +36,21 @@ const TripleToggle = () => {
           id="1"
           name="theme"
           type="radio"
-          onClick={changeTheme}
+          onChange={changeTheme}
           checked={radioActive === "1"}
         />
         <input
           id="2"
           name="theme"
           type="radio"
-          onClick={changeTheme}
+          onChange={changeTheme}
           checked={radioActive === "2"}
         />
         <input
           id="3"
           name="theme"
           type="radio"
-          onClick={changeTheme}
+          onChange={changeTheme}
           checked={radioActive === "3"}
         />
       </div>

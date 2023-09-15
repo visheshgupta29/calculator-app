@@ -4,24 +4,14 @@ import Screen from "../components/Screen";
 import TripleToggle from "../components/TripleToggle";
 import "./App.css";
 
-const calculator = {
-  result: undefined,
-  "+": function () {
-    this.result = this.subject + this.object;
-  },
-  "-": function () {
-    this.result = this.subject - this.object;
-  },
-  "*": function () {
-    this.result = this.subject * this.object;
-  },
-  "/": function () {
-    this.result = this.subject / this.object;
-  },
-};
-
 function App() {
-  const [value, setValue] = useState("0");
+  const [monitorValue, setMonitorValue] = useState("0");
+  const [valueHolder, setValueHolder] = useState("");
+
+  const updateScreen = (monitorVal, valHolder) => {
+    setMonitorValue(monitorVal);
+    setValueHolder(valHolder);
+  };
 
   return (
     <div className="main__bg">
@@ -33,8 +23,8 @@ function App() {
         </div>
       </header>
       <main className="calculator__body">
-        <Screen />
-        <Keypad />
+        <Screen monitorVal={monitorValue} valHolder={valueHolder} />
+        <Keypad updateScreen={updateScreen} />
       </main>
     </div>
   );
