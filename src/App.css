@@ -35,7 +35,7 @@
 body {
   min-height: 100vh;
   display: flex;
-  padding: 1rem;
+  /* padding: 1rem; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,9 +43,9 @@ body {
   font-size: 16px;
 }
 
-/* .main__bg {
-  width: 100vw;
-} */
+.main__bg {
+  margin: 1rem;
+}
 
 /* Dark Theme */
 .dark--theme {
@@ -59,7 +59,7 @@ body {
 .dark--theme .screen__component {
   background-color: var(--blue-800);
   color: var(--white-100);
-  font-size: 3.5rem;
+  font-size: 3.25rem;
   text-align: right;
 }
 
@@ -114,11 +114,12 @@ body {
 .page__heading {
   position: relative;
   top: 8px;
+  /* font-size: 2.5rem; */
 }
 
 .sub__heading {
   position: relative;
-  top: 30px;
+  top: 35px;
   font-size: .75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -229,7 +230,7 @@ input[type="radio"]:checked {
   grid-row: 5 / span 1
 }
 
-.btn-equal {
+.btn--equal {
   grid-column: 3 / span 2;
   grid-row: 5 / span 1
 }

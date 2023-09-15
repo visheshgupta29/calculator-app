@@ -4,8 +4,24 @@ import Screen from "../components/Screen";
 import TripleToggle from "../components/TripleToggle";
 import "./App.css";
 
+const calculator = {
+  result: undefined,
+  "+": function () {
+    this.result = this.subject + this.object;
+  },
+  "-": function () {
+    this.result = this.subject - this.object;
+  },
+  "*": function () {
+    this.result = this.subject * this.object;
+  },
+  "/": function () {
+    this.result = this.subject / this.object;
+  },
+};
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [value, setValue] = useState("0");
 
   return (
     <div className="main__bg">
