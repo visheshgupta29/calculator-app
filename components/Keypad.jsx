@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 let calculator = {
   result: undefined,
   "+": function () {
-    this.result = this.subject + this.object;
+    this.result = Math.round((this.subject + this.object) * 1000) / 1000;
   },
   "-": function () {
-    this.result = this.subject - this.object;
+    this.result = Math.round((this.subject - this.object) * 1000) / 1000;
   },
   "*": function () {
-    this.result = this.subject * this.object;
+    this.result = Math.round(this.subject * this.object * 1000) / 1000;
   },
   "/": function () {
-    this.result = this.subject / this.object;
+    this.result = Math.round((this.subject / this.object) * 1000) / 1000;
   },
 };
 
@@ -31,12 +31,12 @@ const Keypad = ({ updateScreen }) => {
   const [valHolder, setValHolder] = useState(" ");
 
   const onClickNum = (e) => {
-    const num = e.target.id; // 7
+    const num = e.target.id;
     console.log("num: ", num, typeof num);
     setBtnOperationEl(false);
     setBtnEqualEl(false);
 
-    const newClickedNum = [...clickedNum]; // ['7']
+    const newClickedNum = [...clickedNum];
 
     if (num === ".") {
       if (newClickedNum.length === 0) newClickedNum.push("0");
@@ -50,11 +50,10 @@ const Keypad = ({ updateScreen }) => {
 
     console.log("newClickedNum: ", newClickedNum);
 
-    calculator.object = Number(newClickedNum.join("")); // 7
-    const numValue = Number(newClickedNum.join("")); // 7
+    calculator.object = Number(newClickedNum.join(""));
+    const numValue = Number(newClickedNum.join(""));
     console.log("numValue: ", numValue, typeof numValue);
-    setMonitorVal(numValue.toString()); // 7 // not working
-    // setMonitorVal(numValue);
+    setMonitorVal(numValue.toString());
 
     if (
       calculator.subject !== undefined &&
@@ -64,7 +63,7 @@ const Keypad = ({ updateScreen }) => {
       calculator[calculator.operation]();
     }
 
-    setClickedNum(newClickedNum); // not working
+    setClickedNum(newClickedNum);
 
     console.log("clickedNum: ", clickedNum);
     console.log("holdNum: ", holdNum);
@@ -74,13 +73,11 @@ const Keypad = ({ updateScreen }) => {
     console.log("calculator Operation: ", calculator.operation);
     console.log("calculator object: ", calculator.object);
     console.log("calculator result: ", calculator.result);
-
-    updateScreen(monitorVal, valHolder);
   };
 
   const onClickOperation = (e) => {
-    const operationSign = e.target.id; // +
-    calculator.operation = operationSign; // +
+    const operationSign = e.target.id;
+    calculator.operation = operationSign;
     console.log("calculator.operation: ", calculator.operation);
     console.log("operationSign: ", operationSign);
 
@@ -91,34 +88,22 @@ const Keypad = ({ updateScreen }) => {
     const newHoldNum = [...holdNum];
 
     if (calculator.object === undefined) {
-      // const temp = holdNum[0];
-      // setHoldNum(temp, operationSign);
       newHoldNum[1] = operationSign;
     } else {
       calculator.subject = Number(calculator.object); // 7
       if (newHoldNum[0] === "") {
-        // holdNum[0] = calculator.subject;
-        // const temp = holdNum[1];
-        // setHoldNum([calculator.subject, temp]);
         newHoldNum[0] = calculator.subject.toString();
       } else {
-        newHoldNum[0] = Math.round(calculator.result * 1000) / 1000;
-        // const temp = holdNum[1];
-        // setHoldNum([Math.round(calculator.result * 1000) / 1000, temp]);
-        // holdNum[0] = Math.round(calculator.result * 1000) / 1000;
+        newHoldNum[0] = calculator.result;
         calculator.subject = calculator.result;
       }
-      // const temp = holdNum[0];
-      // setHoldNum([temp, calculator.operation]);
-      // holdNum[1] = calculator.operation;
       newHoldNum[1] = calculator.operation;
       delete calculator.object;
     }
     setClickedNum([]);
     setHoldNum(newHoldNum);
 
-    setValHolder(holdNum.join(""));
-    // setMonitorVal(clickedNum.join(""));
+    setValHolder(newHoldNum.join(""));
     setMonitorVal("0");
 
     console.log("clickedNum: ", clickedNum);
@@ -129,14 +114,11 @@ const Keypad = ({ updateScreen }) => {
     console.log("calculator Operation: ", calculator.operation);
     console.log("calculator object: ", calculator.object);
     console.log("calculator result: ", calculator.result);
-
-    updateScreen(monitorVal, valHolder);
   };
 
   const onClickDel = () => {
     const newClickedNum = [...clickedNum];
     newClickedNum.pop();
-    // setClickedNum((oldarray) => oldarray.slice(0, oldarray.length - 1)); // pop()
     if (newClickedNum.length > 0) {
       calculator.object = Number(newClickedNum.join(""));
     } else delete calculator.object;
@@ -159,8 +141,6 @@ const Keypad = ({ updateScreen }) => {
     console.log("calculator Operation: ", calculator.operation);
     console.log("calculator object: ", calculator.object);
     console.log("calculator result: ", calculator.result);
-
-    updateScreen(monitorVal, valHolder);
   };
 
   const onClickEq = () => {
@@ -168,11 +148,13 @@ const Keypad = ({ updateScreen }) => {
     setBtnNumberEl(true);
     setBtnDelEl(true);
 
-    setClickedNum([
+    const newClickedNum = [
       calculator.result || calculator.object || calculator.subject,
-    ]);
+    ];
 
-    setMonitorVal(clickedNum.join(""));
+    setClickedNum(newClickedNum);
+
+    setMonitorVal(newClickedNum.join(""));
 
     console.log("clickedNum: ", clickedNum);
     console.log("holdNum: ", holdNum);
@@ -182,8 +164,6 @@ const Keypad = ({ updateScreen }) => {
     console.log("calculator Operation: ", calculator.operation);
     console.log("calculator object: ", calculator.object);
     console.log("calculator result: ", calculator.result);
-
-    updateScreen(monitorVal, valHolder);
   };
 
   const onClickReset = () => {
@@ -208,9 +188,11 @@ const Keypad = ({ updateScreen }) => {
     console.log("calculator Operation: ", calculator.operation);
     console.log("calculator object: ", calculator.object);
     console.log("calculator result: ", calculator.result);
-
-    updateScreen(monitorVal, valHolder);
   };
+
+  useEffect(() => {
+    updateScreen(monitorVal, valHolder);
+  }, [updateScreen, monitorVal, valHolder, clickedNum, holdNum]);
 
   return (
     <div className="keyboard__component">
