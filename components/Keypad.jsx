@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 let calculator = {
   result: undefined,
@@ -32,7 +32,6 @@ const Keypad = ({ updateScreen }) => {
 
   const onClickNum = (e) => {
     const num = e.target.id;
-    console.log("num: ", num, typeof num);
     setBtnOperationEl(false);
     setBtnEqualEl(false);
 
@@ -48,11 +47,8 @@ const Keypad = ({ updateScreen }) => {
       newClickedNum.push(num);
     }
 
-    console.log("newClickedNum: ", newClickedNum);
-
     calculator.object = Number(newClickedNum.join(""));
     const numValue = Number(newClickedNum.join(""));
-    console.log("numValue: ", numValue, typeof numValue);
     setMonitorVal(numValue.toString());
 
     if (
@@ -64,22 +60,11 @@ const Keypad = ({ updateScreen }) => {
     }
 
     setClickedNum(newClickedNum);
-
-    console.log("clickedNum: ", clickedNum);
-    console.log("holdNum: ", holdNum);
-    console.log("monitorVal: ", monitorVal);
-    console.log("valHolder: ", valHolder);
-    console.log("calculator subject: ", calculator.subject);
-    console.log("calculator Operation: ", calculator.operation);
-    console.log("calculator object: ", calculator.object);
-    console.log("calculator result: ", calculator.result);
   };
 
   const onClickOperation = (e) => {
     const operationSign = e.target.id;
     calculator.operation = operationSign;
-    console.log("calculator.operation: ", calculator.operation);
-    console.log("operationSign: ", operationSign);
 
     setBtnNumberEl(false);
     setDecimalEl(false);
@@ -105,15 +90,6 @@ const Keypad = ({ updateScreen }) => {
 
     setValHolder(newHoldNum.join(""));
     setMonitorVal("0");
-
-    console.log("clickedNum: ", clickedNum);
-    console.log("holdNum: ", holdNum);
-    console.log("monitorVal: ", monitorVal);
-    console.log("valHolder: ", valHolder);
-    console.log("calculator subject: ", calculator.subject);
-    console.log("calculator Operation: ", calculator.operation);
-    console.log("calculator object: ", calculator.object);
-    console.log("calculator result: ", calculator.result);
   };
 
   const onClickDel = () => {
@@ -132,15 +108,6 @@ const Keypad = ({ updateScreen }) => {
     }
     setMonitorVal(newClickedNum.join(""));
     setClickedNum(newClickedNum);
-
-    console.log("clickedNum: ", clickedNum);
-    console.log("holdNum: ", holdNum);
-    console.log("monitorVal: ", monitorVal);
-    console.log("valHolder: ", valHolder);
-    console.log("calculator subject: ", calculator.subject);
-    console.log("calculator Operation: ", calculator.operation);
-    console.log("calculator object: ", calculator.object);
-    console.log("calculator result: ", calculator.result);
   };
 
   const onClickEq = () => {
@@ -155,15 +122,6 @@ const Keypad = ({ updateScreen }) => {
     setClickedNum(newClickedNum);
 
     setMonitorVal(newClickedNum.join(""));
-
-    console.log("clickedNum: ", clickedNum);
-    console.log("holdNum: ", holdNum);
-    console.log("monitorVal: ", monitorVal);
-    console.log("valHolder: ", valHolder);
-    console.log("calculator subject: ", calculator.subject);
-    console.log("calculator Operation: ", calculator.operation);
-    console.log("calculator object: ", calculator.object);
-    console.log("calculator result: ", calculator.result);
   };
 
   const onClickReset = () => {
@@ -179,15 +137,6 @@ const Keypad = ({ updateScreen }) => {
     setBtnEqualEl(true);
     setBtnNumberEl(false);
     setBtnOperationEl(true);
-
-    console.log("clickedNum: ", clickedNum);
-    console.log("holdNum: ", holdNum);
-    console.log("monitorVal: ", monitorVal);
-    console.log("valHolder: ", valHolder);
-    console.log("calculator subject: ", calculator.subject);
-    console.log("calculator Operation: ", calculator.operation);
-    console.log("calculator object: ", calculator.object);
-    console.log("calculator result: ", calculator.result);
   };
 
   useEffect(() => {

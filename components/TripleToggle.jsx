@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const TripleToggle = () => {
-  let selectedTheme = "dark--theme";
+  let selectedTheme;
   const [radioActive, setRadioActive] = useState("1");
 
   const changeTheme = (e) => {
     const theme = e.target.id;
     const bodyEl = document.body;
-    bodyEl.classList.remove(selectedTheme);
+    bodyEl.classList = "";
     setRadioActive(theme);
 
     switch (theme) {
